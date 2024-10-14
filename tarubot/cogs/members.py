@@ -16,7 +16,7 @@ class MemberManagementCog(Cog):
 
     @slash_command(
         description="Set up the member admission interface for the lobby channel.",
-        default_member_permissions=Permissions.administrator,
+        default_member_permissions=Permissions(administrator=True),
     )
     async def setup(
         self, interaction: ApplicationCommandInteraction, channel: TextChannel
@@ -27,6 +27,8 @@ class MemberManagementCog(Cog):
             "To access the server, click the button below.",
             components=[Button(label="Join", custom_id="member_entry_button")],
         )
+
+        interaction.send("Member admission interface set up.", ephemeral=True)
 
     @Cog.listener("on_button_click")
     async def on_button_click(self, interaction: MessageInteraction):

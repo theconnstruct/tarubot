@@ -31,3 +31,4 @@ def main():
         bot.run(getenv("DISCORD_TOKEN"))
     except Exception as e:
         logging.critical(f"An error occurred: {e}")
+        exit(1)
