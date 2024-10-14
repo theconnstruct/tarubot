@@ -2,6 +2,7 @@ from os import getenv
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import logging
 
 Base = declarative_base()
 
@@ -10,6 +11,8 @@ from .character import Character
 
 
 async def init_db():
+    logging.debug(f"Database URL: {getenv("DATABASE_URL")}")
+
     engine = create_async_engine(getenv("DATABASE_URL"), echo=True)
 
     async_session = sessionmaker(
