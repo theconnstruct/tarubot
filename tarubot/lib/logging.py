@@ -1,6 +1,6 @@
 import logging
 import colorlog
-
+from os import getenv
 
 formatter = colorlog.ColoredFormatter(
     fmt=(
@@ -24,5 +24,5 @@ formatter = colorlog.ColoredFormatter(
 handler = colorlog.StreamHandler()
 handler.setFormatter(formatter)
 
-logging.root.setLevel(logging.DEBUG)
+logging.root.setLevel(getenv("LOG_LEVEL", "INFO").upper())
 logging.root.handlers = [handler]
