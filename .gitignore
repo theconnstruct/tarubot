@@ -20,3 +20,5 @@
 
 .venv
 /poetry.toml
+
+.env

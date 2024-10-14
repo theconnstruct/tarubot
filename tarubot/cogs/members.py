@@ -1,4 +1,5 @@
 from ..lib.tarubot import TaruBot
+from ..ui.modals.lobby import LobbyModal
 from disnake import (
     ApplicationCommandInteraction,
     MessageInteraction,
@@ -35,7 +36,7 @@ class MemberManagementCog(Cog):
         if interaction.component.custom_id != "member_entry_button":
             return
 
-        await interaction.send("You have been granted access to the server.")
+        await interaction.response.send_modal(modal=LobbyModal(interaction))
 
 
 def setup(bot: TaruBot):
