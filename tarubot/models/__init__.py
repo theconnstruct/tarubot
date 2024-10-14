@@ -13,7 +13,10 @@ from .character import Character
 async def init_db():
     logging.debug(f"Database URL: {getenv("DATABASE_URL")}")
 
-    engine = create_async_engine(getenv("DATABASE_URL"), echo=True)
+    engine = create_async_engine(
+        getenv("DATABASE_URL").replace("postgresql://", "postgresql+asyncpg://"),
+        echo=True,
+    )
 
     async_session = sessionmaker(
         bind=engine, class_=AsyncSession, expire_on_commit=False
