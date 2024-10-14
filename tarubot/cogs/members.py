@@ -23,19 +23,19 @@ class MemberManagementCog(Cog):
     ):
         logging.debug(f"Setting up member admission interface for {channel.name}...")
 
-        channel.send(
+        await channel.send(
             "To access the server, click the button below.",
             components=[Button(label="Join", custom_id="member_entry_button")],
         )
 
-        interaction.send("Member admission interface set up.", ephemeral=True)
+        await interaction.send("Member admission interface set up.", ephemeral=True)
 
     @Cog.listener("on_button_click")
     async def on_button_click(self, interaction: MessageInteraction):
         if interaction.component.custom_id != "member_entry_button":
             return
 
-        interaction.send("You have been granted access to the server.")
+        await interaction.send("You have been granted access to the server.")
 
 
 def setup(bot: TaruBot):
