@@ -26,3 +26,4 @@ handler.setFormatter(formatter)
 
 logging.root.setLevel(getenv("LOG_LEVEL", "INFO").upper())
 logging.root.handlers = [handler]
+logging.info("Log level set to %s.", logging.getLevelName(logging.root.level))
