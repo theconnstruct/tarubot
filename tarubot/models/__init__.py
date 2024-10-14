@@ -11,12 +11,14 @@ from .character import Character
 
 
 async def init_db():
-    logging.debug(f"Database URL: {getenv("DATABASE_URL")}")
-
-    engine = create_async_engine(
-        getenv("DATABASE_URL").replace("postgresql://", "postgresql+asyncpg://"),
-        echo=True,
+    connection_string = (
+        getenv("DATABASE_URL")
+        .replace("postgresql://", "postgresql+asyncpg://")
+        .replace("sslmode", "ssl")
     )
+    logging.debug(f"Database URL: {connection_string}")
+
+    engine = create_async_engine(connection_string, echo=True)
 
     async_session = sessionmaker(
         bind=engine, class_=AsyncSession, expire_on_commit=False
