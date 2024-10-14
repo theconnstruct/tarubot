@@ -35,7 +35,7 @@ async def launch():
         bot.load_extensions("tarubot/cogs")
         logging.debug("Cogs loaded.")
 
-        bot.run(getenv("DISCORD_TOKEN"))
+        await bot.start(getenv("DISCORD_TOKEN"))
     except Exception as e:
         logging.critical(f"An error occurred: {e}")
         exit(1)
