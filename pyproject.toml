@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "tarubot"
+version = "0.1.0"
+description = ""
+authors = ["Connor Maddox <connor@connstruct.tech>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+disnake = "^2.9.2"
+pynacl = "^1.5.0"
+colorlog = "^6.8.2"
+python-dotenv = "^1.0.1"
+
+[tool.poetry.scripts]
+start = 'tarubot.main:main'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
