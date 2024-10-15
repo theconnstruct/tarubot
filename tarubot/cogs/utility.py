@@ -1,4 +1,4 @@
-from ..datasource import get_character_by_id
+from ..datasource import search_character_by_name
 from ..lib.tarubot import TaruBot
 from disnake import ApplicationCommandInteraction
 from disnake.ext.commands import Cog, slash_command
@@ -25,10 +25,15 @@ class UtilityCommandsCog(Cog):
             f"Received test command from {interaction.user} as interaction ID {interaction.id}."
         )
 
-        character = await get_character_by_id(1)
+        await interaction.response.defer(ephemeral=True)
+
+        search_results = await search_character_by_name("A", "A", "Diabolos")
 
         await interaction.send(
-            f"Received character ID 1: {character.Name}", ephemeral=True
+            "Received search results. Names: {}".format(
+                ", ".join([result.Name for result in search_results])
+            ),
+            ephemeral=True,
         )
 
 

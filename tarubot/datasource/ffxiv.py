@@ -1,5 +1,8 @@
-import aiohttp
+import asyncio
 from box import Box
+from typing import List
+import aiohttp
+import concurrent.futures
 
 
 async def get_character_by_id(lodestone_id: int):
@@ -11,3 +14,39 @@ async def get_character_by_id(lodestone_id: int):
                 return None
 
             return Box((await response.json())["Character"])
+
+
+async def search_character_by_name(
+    first_name: str, last_name: str, server: str, _page: int = 1
+):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(
+            f"http://nodestone:8080/character/search?name={first_name}+{last_name}&server={server}&page={_page}"
+        ) as response:
+            if response.status != 200:
+                return None
+
+            results: List[Box] = [
+                Box(result) for result in (await response.json())["List"]
+            ]
+
+            pagination = (await response.json())["Pagination"]
+
+            if len(results) == 0:
+                return None
+
+            if pagination["PageNext"] == None:
+                return results
+
+            tasks = [
+                search_character_by_name(first_name, last_name, server, p)
+                for p in range(2, pagination["PageTotal"] + 1)
+            ]
+
+            additional_results = await asyncio.gather(*tasks)
+
+            for res in additional_results:
+                if res:
+                    results.extend(res)
+
+            return results
