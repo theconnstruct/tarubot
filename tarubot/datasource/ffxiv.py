@@ -26,19 +26,19 @@ async def search_character_by_name(
             if response.status != 200:
                 return None
 
-            results: List[Box] = [
-                Box(result) for result in (await response.json())["List"]
-            ]
+            results_data = await response.json()
+
+            results: List[Box] = [Box(result) for result in results_data["List"]]
 
             if len(results) == 0:
                 return None
+
+            pagination = results_data["Pagination"]
 
             if pagination["PageNext"] == None:
                 return results
 
             if _page == 1:
-                pagination = (await response.json())["Pagination"]
-
                 tasks = [
                     search_character_by_name(first_name, last_name, server, p)
                     for p in range(2, pagination["PageTotal"] + 1)
