@@ -22,15 +22,13 @@ class UtilityCommandsCog(Cog):
     @slash_command()
     async def test(self, interaction: ApplicationCommandInteraction):
         logging.debug(
-            "Received test command from %s as interaction ID %s.",
-            interaction.user,
-            interaction.id,
+            f"Received test command from {interaction.user} as interaction ID {interaction.id}."
         )
 
         character = await get_character_by_id(1)
 
         await interaction.send(
-            "Received character ID 1: %s" % character.name, ephemeral=True
+            f"Received character ID 1: {character.Name}", ephemeral=True
         )
 
 
