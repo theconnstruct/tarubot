@@ -30,23 +30,24 @@ async def search_character_by_name(
                 Box(result) for result in (await response.json())["List"]
             ]
 
-            pagination = (await response.json())["Pagination"]
-
             if len(results) == 0:
                 return None
 
             if pagination["PageNext"] == None:
                 return results
 
-            tasks = [
-                search_character_by_name(first_name, last_name, server, p)
-                for p in range(2, pagination["PageTotal"] + 1)
-            ]
+            if _page == 1:
+                pagination = (await response.json())["Pagination"]
 
-            additional_results = await asyncio.gather(*tasks)
+                tasks = [
+                    search_character_by_name(first_name, last_name, server, p)
+                    for p in range(2, pagination["PageTotal"] + 1)
+                ]
 
-            for res in additional_results:
-                if res:
-                    results.extend(res)
+                additional_results = await asyncio.gather(*tasks)
+
+                for res in additional_results:
+                    if res:
+                        results.extend(res)
 
             return results
