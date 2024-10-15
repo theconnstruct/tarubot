@@ -13,6 +13,7 @@ colorlog = "^6.8.2"
 python-dotenv = "^1.0.1"
 sqlalchemy = "^2.0.35"
 asyncpg = "^0.29.0"
+python-box = "^7.2.0"
 
 [tool.poetry.scripts]
 start = 'tarubot.main:main'
