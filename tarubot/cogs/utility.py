@@ -32,7 +32,7 @@ class UtilityCommandsCog(Cog):
         await interaction.send(
             "Received search results. Names: {}".format(
                 ", ".join([result.Name for result in search_results])
-            ),
+            )[:1900],
             ephemeral=True,
         )
 
