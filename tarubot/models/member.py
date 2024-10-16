@@ -1,11 +1,16 @@
-from sqlalchemy import Column, BigInteger, Integer
-from sqlalchemy.orm import relationship
 from . import Base
+from .game_character import GameCharacter
+from sqlalchemy import BigInteger
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from typing import List, Optional
 
 
 class Member(Base):
-    __tablename__ = "members"
+    __tablename__ = "member"
 
-    id = Column(BigInteger, primary_key=True, unique=True)
-    primary_char_id = Column(Integer, nullable=True)
-    characters = relationship("Character", back_populates="member")
+    snowflake: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    primary_character_id: Mapped[Optional[int]] = mapped_column(BigInteger, unique=True)
+
+    game_characters: Mapped[List["GameCharacter"]] = relationship(
+        "GameCharacter", back_populates="member"
+    )

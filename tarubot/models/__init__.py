@@ -7,7 +7,7 @@ import logging
 Base = declarative_base()
 
 from .member import Member
-from .character import Character
+from .game_character import GameCharacter
 
 
 async def init_db():
