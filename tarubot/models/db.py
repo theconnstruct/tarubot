@@ -1,4 +1,3 @@
-from . import Base
 from os import getenv
 from sqlalchemy import BigInteger, DateTime, ForeignKey, String, text
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
