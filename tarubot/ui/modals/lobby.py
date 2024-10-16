@@ -1,3 +1,4 @@
+from ...datasource import search_character_by_name
 from disnake import MessageInteraction, ModalInteraction
 from disnake.ui import Modal, TextInput
 
@@ -34,7 +35,27 @@ class LobbyModal(Modal):
         )
 
     async def callback(self, interaction: ModalInteraction):
+        await interaction.response.defer(ephemeral=True)
+
+        search_results = await search_character_by_name(
+            interaction.text_values["first_name"],
+            interaction.text_values["last_name"],
+            interaction.text_values["server"],
+        )
+
+        if not search_results:
+            await interaction.send(
+                "No character found with the provided information. Please try again."
+            )
+            return
+
+        if len(search_results) > 1:
+            await interaction.send(
+                "Multiple characters found with the provided information. Please narrow down your search."
+            )
+            return
+
         await interaction.send(
-            f"You have been granted access to the server.\n\nIf this were real, I would have changed your nickname to `{interaction.text_values['first_name']} {interaction.text_values['last_name']}`.",
+            f"You have been granted access to the server.\n\nIf this were real, I would have changed your nickname to `{search_results[0].Name}`.",
             ephemeral=True,
         )
