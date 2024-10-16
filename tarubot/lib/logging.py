@@ -5,6 +5,8 @@ from os import getenv
 formatter = colorlog.ColoredFormatter(
     fmt=(
         "%(blue)s%(asctime)s%(reset)s "
+        if getenv("SUPPRESS_LOG_TIMESTAMP")
+        else ""
         "| %(log_color)s%(levelname)-8s%(reset)s | "
         "%(purple)s%(name)s:%(funcName)s:%(lineno)d%(reset)s - "
         "%(bold_white)s%(message)s%(reset)s"
