@@ -1,4 +1,5 @@
 import asyncio
+import logging
 from box import Box
 from typing import Dict, List, Optional
 import aiohttp
@@ -88,6 +89,8 @@ async def get_fc_members_by_id(
 
             if "FreeCompanyMembers" not in results_data:
                 return None
+
+            logging.debug(results_data)
 
             members = [Box(member) for member in results_data["FreeCompanyMembers"]]
 
