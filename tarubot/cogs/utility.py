@@ -1,4 +1,4 @@
-from ..datasource import search_character_by_name
+from ..datasource import get_fc_members_by_id
 from ..lib.tarubot import TaruBot
 from disnake import ApplicationCommandInteraction
 from disnake.ext.commands import Cog, slash_command
@@ -27,7 +27,7 @@ class UtilityCommandsCog(Cog):
 
         await interaction.response.defer(ephemeral=True)
 
-        search_results = await search_character_by_name("A", "A", "Diabolos")
+        search_results = await get_fc_members_by_id(9232097761132958152)
 
         await interaction.send(
             "Received search results. Names: {}".format(
