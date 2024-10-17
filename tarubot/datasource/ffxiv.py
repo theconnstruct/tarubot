@@ -40,7 +40,7 @@ async def search_character_by_name(
 
             pagination = results_data.get("Pagination")
 
-            if pagination and pagination["PageNext"] is None:
+            if not pagination or pagination["PageNext"] is None:
                 return results
 
             if _page == 1:
@@ -62,7 +62,7 @@ async def search_character_by_name(
                     if response.status == 200:
                         additional_results_data = await response.json()
 
-                        if not additional_results_data.get("List"):
+                        if "List" not in additional_results_data:
                             continue
 
                         additional_results = [
@@ -86,23 +86,17 @@ async def get_fc_members_by_id(
 
             results_data: Dict = await response.json()
 
-            if (
-                "FreeCompany" not in results_data
-                or "FreeCompanyMembers" not in results_data["FreeCompany"]
-            ):
+            if "FreeCompanyMembers" not in results_data:
                 return None
 
-            members = [
-                Box(member)
-                for member in results_data["FreeCompany"]["FreeCompanyMembers"]
-            ]
+            members = [Box(member) for member in results_data["FreeCompanyMembers"]]
 
             pagination = results_data.get("Pagination")
 
-            if pagination and pagination["PageNext"] is None:
+            if not pagination or pagination["PageNext"] is None:
                 return members
 
-            if _page == 1 and pagination:
+            if _page == 1:
                 tasks = [
                     session.get(
                         f"{api_base_url}/freecompany/{fc_id}",
@@ -119,18 +113,12 @@ async def get_fc_members_by_id(
 
                     additional_results_data = await response.json()
 
-                    if (
-                        "FreeCompany" not in additional_results_data
-                        or "FreeCompanyMembers"
-                        not in additional_results_data["FreeCompany"]
-                    ):
+                    if "FreeCompanyMembers" not in additional_results_data:
                         continue
 
                     additional_members = [
                         Box(member)
-                        for member in additional_results_data["FreeCompany"][
-                            "FreeCompanyMembers"
-                        ]
+                        for member in additional_results_data["FreeCompanyMembers"]
                     ]
 
                     members.extend(additional_members)
