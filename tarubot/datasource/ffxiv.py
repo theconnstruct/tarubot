@@ -41,7 +41,7 @@ async def search_character_by_name(
 
             pagination = results_data.get("Pagination")
 
-            if not pagination or pagination["PageNext"] is None:
+            if not pagination or not pagination.get("PageNext") is None:
                 return results
 
             if _page == 1:
@@ -63,7 +63,7 @@ async def search_character_by_name(
                     if response.status == 200:
                         additional_results_data = await response.json()
 
-                        if "List" not in additional_results_data:
+                        if not additional_results_data.get("List"):
                             continue
 
                         additional_results = [
@@ -87,12 +87,14 @@ async def get_fc_members_by_id(
 
             results_data: Dict = await response.json()
 
-            if "FreeCompanyMembers" not in results_data:
+            if not results_data.get("FreeCompanyMembers") or not results_data[
+                "FreeCompanyMembers"
+            ].get("List"):
                 return None
 
-            logging.debug(results_data)
-
-            members = [Box(member) for member in results_data["FreeCompanyMembers"]]
+            members = [
+                Box(member) for member in results_data["FreeCompanyMembers"]["List"]
+            ]
 
             pagination = results_data.get("Pagination")
 
@@ -116,12 +118,16 @@ async def get_fc_members_by_id(
 
                     additional_results_data = await response.json()
 
-                    if "FreeCompanyMembers" not in additional_results_data:
+                    if not additional_results_data.get(
+                        "FreeCompanyMembers"
+                    ) or not additional_results_data["FreeCompanyMembers"].get("List"):
                         continue
 
                     additional_members = [
                         Box(member)
-                        for member in additional_results_data["FreeCompanyMembers"]
+                        for member in additional_results_data["FreeCompanyMembers"][
+                            "List"
+                        ]
                     ]
 
                     members.extend(additional_members)
