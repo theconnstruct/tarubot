@@ -27,7 +27,7 @@ Description:
     It retrieves testing guild IDs and the Discord API token from environment variables,
     sets up the bot with its extensions, and starts the bot.
 Environment Variables:
-    TEST_GUILD_IDS:
+    DISCORD_GUILD_IDS:
         An optional, comma-separated list of guild IDs for testing purposes.
         If present, these are converted to a list of integers.
     DISCORD_API_TOKEN:
@@ -36,7 +36,7 @@ Functions:
     main():
         Main entry point for the application.
         Process:
-            - Reads the "TEST_GUILD_IDS" environment variable; if set, splits the string by commas,
+            - Reads the "DISCORD_GUILD_IDS" environment variable; if set, splits the string by commas,
               converts each value to an integer, and assigns the resulting list to `test_guild_ids`.
             - Creates an instance of TaruBot, optionally associating it with test guilds.
             - Loads the bot's extensions from the "tarubot/cogs" directory.
@@ -48,8 +48,8 @@ Functions:
 
 def main() -> None:
     test_guild_ids: Optional[list[int]] = (
-        list(map(int, cast(str, os.environ.get("TEST_GUILD_IDS")).split(",")))
-        if os.environ.get("TEST_GUILD_IDS")
+        list(map(int, cast(str, os.environ.get("DISCORD_GUILD_IDS")).split(",")))
+        if os.environ.get("DISCORD_GUILD_IDS")
         else None
     )
 
