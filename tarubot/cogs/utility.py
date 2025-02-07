@@ -45,11 +45,19 @@ class UtilityCommandsCog(commands.Cog):
                                                                      )
             )
 
-    @commands.slash_command(description="View the source code for this bot.")
+    @commands.slash_command(
+            description="View version, source code, and license information for this bot and integrated services.")
     async def source(self, interaction: disnake.ApplicationCommandInteraction):
-        await interaction.send("""The source code for this bot is available at https://github.com/theconnstruct/tarubot.
+        await interaction.send("""# TaruBot 2.0.0-dev
+
+**Note**: Version 2.0.0 of TaruBot is in early heavy development. Things will break, things will change. Abandon hope all ye who enter here.
+
+## TaruBot Source Code
+The source code for this bot is available at https://github.com/theconnstruct/tarubot.
 Tarubot's source code is licensed under the GNU Affero General Public License 3.0.
 
+## Integrated Services
+### Nodestone
 This bot interacts with Lodestone via the Nodestone project. The source code for Nodestone is available at https://github.com/xivapi/nodestone.
 Unfortunately, no software license has been included with the Nodestone source code. I've asked the author what license applies to the Nodestone source code.""",
                                ephemeral=True)
