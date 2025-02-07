@@ -18,7 +18,7 @@ Module: Tarubot Initialization
 This module initializes the environment for TaruBot by performing the following tasks:
     - Loads environment variables from a .env file, if present.
     - Configures logging with coloredlogs using a log level specified by the LOG_LEVEL environment variable,
-      defaulting to "WARNING" if not provided.
+      defaulting to "INFO" if not provided.
     - Verifies that all required environment variables are set. The required variables include:
         - DISCORD_API_TOKEN: Discord API token.
         - NODESTONE_BASE_URI: Nodestone API base URI.
@@ -32,7 +32,7 @@ import os
 
 load_dotenv()
 
-coloredlogs.install(level=os.environ.get("LOG_LEVEL") or "WARNING")
+coloredlogs.install(level=os.environ.get("LOG_LEVEL") or "INFO")
 
 required_vars = {
     "DISCORD_API_TOKEN": "Discord API token",
