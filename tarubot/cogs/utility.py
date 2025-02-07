@@ -27,28 +27,32 @@ class UtilityCommandsCog(commands.Cog):
     @commands.slash_command(description="Check bot alive status and latency.")
     async def ping(self, interaction: disnake.ApplicationCommandInteraction):
         await interaction.send(
-                "Pong! Current websocket latency is {} milliseconds.".format(
-                        int(self.bot.latency * 1000)
-                ),
-                ephemeral=True,
+            "Pong! Current websocket latency is {} milliseconds.".format(
+                int(self.bot.latency * 1000)
+            ),
+            ephemeral=True,
         )
 
     @commands.slash_command(description="Test nodestone worker connectivity.")
-    async def test(self, interaction: disnake.ApplicationCommandInteraction, character_id: int):
+    async def test(
+        self, interaction: disnake.ApplicationCommandInteraction, character_id: int
+    ):
         character_data = await nodestone.get_character_by_id(character_id)
         if not character_data:
             await interaction.send("No character found with that ID.", ephemeral=True)
         else:
             await interaction.send(
-                    "```json\nFound character {} on {}.\n```".format(character_data['Name'],
-                                                                     character_data['World']
-                                                                     )
+                "```json\nFound character {} on {}.\n```".format(
+                    character_data["Name"], character_data["World"]
+                )
             )
 
     @commands.slash_command(
-            description="View version, source code, and license information for this bot and integrated services.")
+        description="View version, source code, and license information for this bot and integrated services."
+    )
     async def version(self, interaction: disnake.ApplicationCommandInteraction):
-        await interaction.send("""# TaruBot 2.0.0-dev
+        await interaction.send(
+            """# TaruBot 2.0.0-dev
 
 **Note**: TaruBot v2 is in early and heavy development. Things will break, things will change. Abandon hope all ye who enter here.
 
@@ -60,7 +64,8 @@ TaruBot's source code is licensed under the **GNU Affero General Public License 
 ### Nodestone
 This bot interacts with Lodestone via the Nodestone project. The source code for Nodestone is available at https://github.com/xivapi/nodestone.
 Unfortunately, no software license has been included with the Nodestone source code. I've asked the author what license applies to the Nodestone source code.""",
-                               ephemeral=True)
+            ephemeral=True,
+        )
 
 
 def setup(bot: commands.InteractionBot):
