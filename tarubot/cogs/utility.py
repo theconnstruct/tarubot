@@ -45,6 +45,12 @@ class UtilityCommandsCog(commands.Cog):
                                                                      )
             )
 
+    @commands.slash_command(description="View the source code for this bot.")
+    async def source(self, interaction: disnake.ApplicationCommandInteraction):
+        await interaction.send("The source code for this bot can be viewed at "
+                               "https://github.com/theconnstruct/tarubot.\nThe source code is licensed under the GNU "
+                               "Affero General Public License 3.0.", ephemeral=True)
+
 
 def setup(bot: commands.InteractionBot):
     bot.add_cog(UtilityCommandsCog(bot))
