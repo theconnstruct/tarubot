@@ -2,6 +2,10 @@
 
 This Discord bot synchronizes your Final Fantasy XIV Free Company (FC) membership with roles on your Discord server.
 
+[![Deploy to DO](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/theconnstruct/tarubot/tree/main&refcode=bb136a9104e1)
+
+**Full Disclosure**: The link attached to the above button does include my DigitalOcean referral code. I receive compensation from DigitalOcean in the form of service credits if you use this link. No personal or identifiable information (or any at all, I don't think) is provided to me if you use this referral link. Obviously, I would appreciate it, and it would offset the cost of development.
+
 ## Version 2
 
 Rewrite time! Version 1... worked... for a very generous definition of the term. There are a lot of things about its design I wish I did differently.

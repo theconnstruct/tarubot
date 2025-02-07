@@ -1,0 +1,53 @@
+spec:
+  alerts:
+  - rule: DEPLOYMENT_FAILED
+  - rule: DOMAIN_FAILED
+  databases:
+  - engine: PG
+    name: tarubot-db
+  features:
+  - buildpack-stack=ubuntu-22
+  ingress: {}
+  name: tarubot
+  services:
+  - environment_slug: node-js
+    envs:
+    - key: DATABASE_URL
+      scope: RUN_TIME
+      value: ${tarubot-db.DATABASE_URL}
+    git:
+      branch: master
+      repo_clone_url: https://github.com/xivapi/nodestone.git
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    internal_ports:
+    - 8080
+    name: nodestone
+    run_command: yarn run express:start
+  workers:
+  - environment_slug: python
+    envs:
+    - key: DISCORD_API_TOKEN
+      scope: RUN_TIME
+      type: SECRET
+    - key: DISCORD_APP_ID
+      scope: RUN_TIME
+    - key: DISCORD_GUILD_IDS
+      scope: RUN_TIME
+    - key: LOG_LEVEL
+      scope: RUN_TIME
+      value: INFO
+    - key: NODESTONE_BASE_URI
+      scope: RUN_TIME
+      value: http://nodestone:8080
+    - key: DATABASE_URL
+      scope: RUN_TIME
+      value: ${tarubot-db.DATABASE_URL}
+    git:
+      branch: main
+      repo_clone_url: theconnstruct/tarubot
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    name: tarubot-bot
+    run_command: tarubot
+    source_dir: /
