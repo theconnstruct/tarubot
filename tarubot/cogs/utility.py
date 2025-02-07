@@ -16,11 +16,6 @@ class UtilityCommandsCog(commands.Cog):
             ephemeral=True,
         )
 
-    @commands.slash_command()
-    async def test(self, interaction: disnake.ApplicationCommandInteraction):
-        guild = self.bot.get_guild(738682232479318016)
-        await interaction.send("Guild name: {}".format(guild.name), ephemeral=True)
-
 
 def setup(bot: commands.InteractionBot):
     bot.add_cog(UtilityCommandsCog(bot))
