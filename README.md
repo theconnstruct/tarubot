@@ -4,7 +4,7 @@ This Discord bot synchronizes your Final Fantasy XIV Free Company (FC) membershi
 
 [![Deploy to DO](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/theconnstruct/tarubot/tree/main&refcode=bb136a9104e1)
 
-**Please note that this button contains my DigitalOcean referral link.** If you sign up for a new DigitalOcean account through this link, both you and I may receive service credits, subject to the current terms of DigitalOcean's Referral Program. Importantly, I do not receive any of your personal information; any data you provide is handled according to DigitalOcean's Privacy Policy and Terms of Service. You are free to sign up directly with DigitalOcean without using this referral link if you prefer. Any referral credits I receive help offset the cost of development.
+**Please note that this button contains my DigitalOcean referral link.** If you sign up for a new DigitalOcean account through this link, both you and I may receive service credits, subject to the current terms of DigitalOcean's Referral Program. Importantly, I do not receive any of your personal information; any data you provide is handled according to DigitalOcean's Privacy Policy and Terms of Service. You are free to sign up directly with DigitalOcean without using this referral link if you prefer. Any referral credits I receive help offset the costs of hosting and development.
 
 ## Version 2
 
