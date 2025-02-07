@@ -13,15 +13,16 @@
 #  You should have received a copy of the GNU Affero General Public License
 #  along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-from typing import Union
 
+from typing import Union
 import aiohttp
+import os
 
 
 async def get_character_by_id(character_id: int) -> Union[dict, None]:
     async with aiohttp.ClientSession() as session:
         async with session.get(
-            f"http://nodestone:8080/Character/{character_id}"
+            f"{os.environ.get("NODESTONE_BASE_URI")}/Character/{character_id}"
         ) as response:
             if response.status == 200:
                 response_data = await response.json()

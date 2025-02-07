@@ -13,10 +13,10 @@
 #  You should have received a copy of the GNU Affero General Public License
 #  along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-import disnake
-from disnake.ext import commands
 
+from disnake.ext import commands
 from tarubot.lib import nodestone
+import disnake
 
 
 class UtilityCommandsCog(commands.Cog):
