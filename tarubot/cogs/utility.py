@@ -50,7 +50,7 @@ class UtilityCommandsCog(commands.Cog):
     async def version(self, interaction: disnake.ApplicationCommandInteraction):
         await interaction.send("""# TaruBot 2.0.0-dev
 
-**Note**: TaruBot v2 is in early heavy development. Things will break, things will change. Abandon hope all ye who enter here.
+**Note**: TaruBot v2 is in early and heavy development. Things will break, things will change. Abandon hope all ye who enter here.
 
 ## TaruBot Source Code
 The source code for this bot is available at https://github.com/theconnstruct/tarubot.
