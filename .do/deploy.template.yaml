@@ -45,7 +45,7 @@ spec:
       value: ${tarubot-db.DATABASE_URL}
     git:
       branch: main
-      repo_clone_url: theconnstruct/tarubot
+      repo_clone_url: https://github.com/theconnstruct/tarubot.git
     instance_count: 1
     instance_size_slug: apps-s-1vcpu-0.5gb
     name: tarubot-bot
