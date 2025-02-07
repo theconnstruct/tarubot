@@ -54,7 +54,7 @@ class UtilityCommandsCog(commands.Cog):
 
 ## TaruBot Source Code
 The source code for this bot is available at https://github.com/theconnstruct/tarubot.
-Tarubot's source code is licensed under the **GNU Affero General Public License 3.0**.
+TaruBot's source code is licensed under the **GNU Affero General Public License 3.0**.
 
 ## Integrated Services
 ### Nodestone
