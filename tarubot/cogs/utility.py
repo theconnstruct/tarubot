@@ -47,7 +47,7 @@ class UtilityCommandsCog(commands.Cog):
 
     @commands.slash_command(
             description="View version, source code, and license information for this bot and integrated services.")
-    async def source(self, interaction: disnake.ApplicationCommandInteraction):
+    async def version(self, interaction: disnake.ApplicationCommandInteraction):
         await interaction.send("""# TaruBot 2.0.0-dev
 
 **Note**: Version 2.0.0 of TaruBot is in early heavy development. Things will break, things will change. Abandon hope all ye who enter here.
