@@ -15,7 +15,7 @@
 
 
 from disnake.ext import commands
-from tarubot.lib import nodestone
+from tarubot.lib import nodestone, TaruBot
 import disnake
 
 
@@ -23,7 +23,7 @@ class UtilityCommandsCog(commands.Cog):
     """
     UtilityCommandsCog is a cog that provides utility commands for TaruBot.
     Attributes:
-        bot (commands.InteractionBot): The bot instance used to handle interactions and commands.
+        bot (TaruBot): The bot instance used to handle interactions and commands.
     Commands:
         ping:
             Checks the bot's connection by sending a "Pong!" message along with the current websocket latency in milliseconds.
@@ -42,11 +42,11 @@ class UtilityCommandsCog(commands.Cog):
             The response is sent as an ephemeral message.
     """
 
-    def __init__(self, bot: commands.InteractionBot):
+    def __init__(self, bot: TaruBot):
         """
-        Initializes the cog with the provided InteractionBot.
+        Initializes the cog with the provided TaruBot.
         Args:
-            bot (commands.InteractionBot): An instance responsible for handling interactions and commands.
+            bot (TaruBot): An instance responsible for handling interactions and commands.
         This constructor initializes the parent class and sets up the cog with the necessary bot context.
         """
 
@@ -130,5 +130,11 @@ Unfortunately, no software license has been included with the Nodestone source c
         )
 
 
-def setup(bot: commands.InteractionBot):
+def setup(bot: TaruBot):
+    """
+    Initializes and attaches the UtilityCommandsCog to the provided bot instance.
+    Parameters:
+        bot (TaruBot): The bot instance to which the UtilityCommandsCog is added.
+    """
+
     bot.add_cog(UtilityCommandsCog(bot))

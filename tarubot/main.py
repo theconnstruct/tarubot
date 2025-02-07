@@ -17,6 +17,7 @@
 from disnake.ext import commands
 import os
 from typing import Optional, cast
+from tarubot.lib import TaruBot
 
 """
 Module: tarubot.main
@@ -37,7 +38,7 @@ Functions:
         Process:
             - Reads the "TEST_GUILD_IDS" environment variable; if set, splits the string by commas,
               converts each value to an integer, and assigns the resulting list to `test_guild_ids`.
-            - Creates an instance of an InteractionBot, optionally associating it with test guilds.
+            - Creates an instance of TaruBot, optionally associating it with test guilds.
             - Loads the bot's extensions from the "tarubot/cogs" directory.
             - Starts the bot using the API token provided in the "DISCORD_API_TOKEN" environment variable.
         Note:
@@ -52,7 +53,7 @@ def main() -> None:
         else None
     )
 
-    bot = commands.InteractionBot(test_guilds=test_guild_ids)
+    bot = TaruBot(test_guilds=test_guild_ids)
     bot.load_extensions("tarubot/cogs")
 
     bot.run(os.environ.get("DISCORD_API_TOKEN"))
