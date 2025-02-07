@@ -40,23 +40,3 @@ Oh, for f... If it's that important to you, fork the repo, write the code, _test
 * Character profile display commands.
 * FC activity tracking (if feasible via Lodestone).
 * Customizable welcome messages.
-
-# Referral Link Disclosure
-
-The following link button directs you to DigitalOcean.  Please be aware that this link includes my DigitalOcean referral code: [Insert Link Here, or describe where the link is, e.g., "The button labeled 'Sign Up for DigitalOcean' below"].
-
-What this means for you:
-
-If you use this link to sign up for a new DigitalOcean account, you may receive free service credits, subject to the current terms and conditions of DigitalOcean's Referral Program. The exact amount of credit and the terms for receiving it are determined by DigitalOcean and may change.
-I will also receive a referral bonus in the form of service credits from DigitalOcean if you sign up and become an active user (again, subject to the terms of their Referral Program).
-Important Privacy Information:
-
-I do not receive any of your personal or identifiable information when you click this link or sign up for DigitalOcean using it. I only receive notification from DigitalOcean that a referral was successful and the associated credit, without any details about who signed up.
-Any personal information you provide to DigitalOcean during the signup process or while using their services is subject to DigitalOcean's Privacy Policy and Terms of Service. I encourage you to review these policies on the DigitalOcean website ([link to DO's privacy policy] and [link to DO's terms of service] if you want to include them for user convenience). I am not responsible for how DigitalOcean handles your data.
-Transparency and Choice:
-
-This disclosure is provided to be fully transparent about the nature of this referral link. You are under no obligation to use this link. You can sign up for DigitalOcean directly without using the referral link if you prefer. I present this link as a potential benefit to both of us, should you choose to use it.
-
-Disclaimer:
-
-I am not an employee or official representative of DigitalOcean.  This referral program is a standard offering from DigitalOcean, and my participation in it does not constitute an endorsement of their services beyond my own personal positive experience. I make no guarantees about the specific amount of credits you will receive or the ongoing availability of the referral program. DigitalOcean's terms and conditions always apply.
