@@ -13,21 +13,46 @@
 #  You should have received a copy of the GNU Affero General Public License
 #  along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-import logging
-import os
 
 from disnake.ext import commands
+import os
+from typing import Optional, cast
+
+"""
+Module: tarubot.main
+--------------------
+Description:
+    This module initializes and launches TaruBot using the disnake library.
+    It retrieves testing guild IDs and the Discord API token from environment variables,
+    sets up the bot with its extensions, and starts the bot.
+Environment Variables:
+    TEST_GUILD_IDS:
+        An optional, comma-separated list of guild IDs for testing purposes.
+        If present, these are converted to a list of integers.
+    DISCORD_API_TOKEN:
+        The API token used for authenticating and running the Discord bot.
+Functions:
+    main():
+        Main entry point for the application.
+        Process:
+            - Reads the "TEST_GUILD_IDS" environment variable; if set, splits the string by commas,
+              converts each value to an integer, and assigns the resulting list to `test_guild_ids`.
+            - Creates an instance of an InteractionBot, optionally associating it with test guilds.
+            - Loads the bot's extensions from the "tarubot/cogs" directory.
+            - Starts the bot using the API token provided in the "DISCORD_API_TOKEN" environment variable.
+        Note:
+            The function expects the necessary environment variables to be correctly set.
+"""
 
 
-def main():
-    test_guild_ids = (
-        list(map(int, os.environ.get("DISCORD_GUILD_IDS").split(",")))
-        if os.environ.get("DISCORD_GUILD_IDS")
+def main() -> None:
+    test_guild_ids: Optional[list[int]] = (
+        list(map(int, cast(str, os.environ.get("TEST_GUILD_IDS")).split(",")))
+        if os.environ.get("TEST_GUILD_IDS")
         else None
     )
 
     bot = commands.InteractionBot(test_guilds=test_guild_ids)
-
     bot.load_extensions("tarubot/cogs")
 
     bot.run(os.environ.get("DISCORD_API_TOKEN"))

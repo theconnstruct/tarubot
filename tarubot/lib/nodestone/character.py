@@ -20,6 +20,23 @@ import os
 
 
 async def get_character_by_id(character_id: int) -> Union[dict, None]:
+    """
+    Asynchronously retrieves character data for a given character ID from the Nodestone API.
+
+    This function performs an HTTP GET request to the Nodestone API, using the base URI
+    specified by the NODESTONE_BASE_URI environment variable. If the request is successful
+    (i.e., returns a status code of 200), the function extracts and returns the character
+    information from the returned JSON data. If the request fails or the character data is not
+    found, the function returns None.
+
+    Parameters:
+        character_id (int): The unique identifier of the character to be retrieved.
+
+    Returns:
+        Union[dict, None]: A dictionary containing the character data if the request is successful;
+                           otherwise, None.
+    """
+
     async with aiohttp.ClientSession() as session:
         async with session.get(
             f"{os.environ.get("NODESTONE_BASE_URI")}/Character/{character_id}"

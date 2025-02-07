@@ -13,6 +13,17 @@
 #  You should have received a copy of the GNU Affero General Public License
 #  along with this program. If not, see <https://www.gnu.org/licenses/>.
 
+"""
+Module: Tarubot Initialization
+This module initializes the environment for TaruBot by performing the following tasks:
+    - Loads environment variables from a .env file, if present.
+    - Configures logging with coloredlogs using a log level specified by the LOG_LEVEL environment variable,
+      defaulting to "WARNING" if not provided.
+    - Verifies that all required environment variables are set. The required variables include:
+        - DISCORD_API_TOKEN: Discord API token.
+        - NODESTONE_BASE_URI: Nodestone API base URI.
+If any required environment variable is missing, a critical log message is issued and the program exits.
+"""
 
 from dotenv import load_dotenv
 import coloredlogs
@@ -23,20 +34,17 @@ load_dotenv()
 
 coloredlogs.install(level=os.environ.get("LOG_LEVEL") or "WARNING")
 
-clean_start = True
+required_vars = {
+    "DISCORD_API_TOKEN": "Discord API token",
+    "NODESTONE_BASE_URI": "Nodestone API base URI",
+}
 
-if not os.environ.get("DISCORD_API_TOKEN"):
-    logging.critical(
-        "No Discord API token found in environment variables. Set DISCORD_API_TOKEN."
-    )
-    clean_start = False
+missing = False
+for var, desc in required_vars.items():
+    if not os.environ.get(var):
+        logging.critical(f"No {desc} found in environment. Set {var}.")
+        missing = True
 
-if not os.environ.get("NODESTONE_BASE_URI"):
-    logging.critical(
-        "No Nodestone API base URI found in environment variables. Set NODESTONE_BASE_URI."
-    )
-    clean_start = False
-
-if not clean_start:
+if missing:
     logging.critical("Exiting due to missing environment variables.")
     exit(1)
