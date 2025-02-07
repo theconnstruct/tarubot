@@ -20,9 +20,10 @@ This Discord bot synchronizes your Final Fantasy XIV Free Company (FC) membershi
 Could I rewrite TaruBot to use something like BeautifulSoup and CSS selectors to parse Lodestone data directly? Sure. Do
 I _want_ to? **I would rather shave my entire body using a chainsaw.**
 
-> I don't want to run a Docker container. Pleeeeease?
+> I don't want to run a Docker container or a NodeJS process. Pleeeeease?
 
-If it's that important to you, fork the repo, write the code, _test it extensively_, and submit a PR. Otherwise, **not
+Oh, for f... If it's that important to you, fork the repo, write the code, _test it extensively_, and submit a PR.
+Otherwise, **not
 happening.**
 
 ## Planned/Future Functionality
