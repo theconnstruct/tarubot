@@ -19,8 +19,8 @@ class UtilityCommandsCog(commands.Cog):
         )
 
     @commands.slash_command(description="Test nodestone worker connectivity.")
-    async def test(self, interaction: disnake.ApplicationCommandInteraction):
-        character_data = await nodestone.get_character_by_id(38371223)
+    async def test(self, interaction: disnake.ApplicationCommandInteraction, character_id: int):
+        character_data = await nodestone.get_character_by_id(character_id)
         if not character_data:
             await interaction.send("No character found with that ID.", ephemeral=True)
         else:
