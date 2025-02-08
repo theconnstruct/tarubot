@@ -49,3 +49,11 @@ for var, desc in required_vars.items():
 if missing:
     logging.critical("Exiting due to missing environment variables.")
     exit(1)
+
+logging.debug(
+    "Environment variable data:\n{}".format(
+        "\n".join(
+            f"{k}: {v}" for k, v in os.environ.items() if k != "DISCORD_API_TOKEN" and k
+        )
+    )
+)
