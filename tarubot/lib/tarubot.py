@@ -40,11 +40,5 @@ class TaruBot(commands.InteractionBot):
     async def on_ready(self):
         logging.info(f"Logged in as {self.user}.")
 
-        logging.info("Connecting to the database...")
-        if await db.test_db():
-            logging.info("Database connection established successfully.")
-        else:
-            logging.error("Failed to connect to the database.")
-
         # I was originally going to set this to "with itself," but that seemed a bit too... Y'know.
         await self.change_presence(activity=disnake.Game(name="with the API."))
