@@ -2,8 +2,6 @@ from tortoise import fields, Tortoise, connections
 from tortoise.models import Model
 import os
 
-db_connected = False
-
 
 class DiscordUser(Model):
     id = fields.BigIntField(pk=True)
@@ -35,7 +33,7 @@ class GameCharacter(Model):
         "models.DiscordUser", related_name="characters"
     )
     fc: fields.ForeignKeyNullableRelation[FreeCompany] = fields.ForeignKeyField(
-        "models.FreeCompany", related_name="members"
+        "models.FreeCompany", related_name="members", null=True
     )
 
     def __repr__(self):
@@ -50,9 +48,6 @@ class GameCharacter(Model):
 
 
 async def test_db():
-    if not db_connected:
-        await init()
-
     await connections.get("default").execute_query("SELECT 1")
 
 
@@ -65,6 +60,3 @@ async def init():
     )
 
     await Tortoise.generate_schemas(safe=True)
-
-    global db_connected
-    db_connected = True
