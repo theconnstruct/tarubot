@@ -61,7 +61,9 @@ async def init():
         "connections": {
             "default": {
                 "engine": "tortoise.backends.asyncpg",
-                "credentials": dict(),
+                "credentials": {
+                    "ssl": True,
+                },
             },
         }
     }
