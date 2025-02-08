@@ -112,7 +112,9 @@ class UtilityCommandsCog(commands.Cog):
             await db.test_db()
             await interaction.send("Database connection successful.", ephemeral=True)
         except Exception as e:
-            await interaction.send("Database connection failed.", ephemeral=True)
+            await interaction.send(
+                f"Database connection failed. Exception data: `{e}`", ephemeral=True
+            )
 
     @commands.slash_command(
         description="View version, source code, and license information for this bot and integrated services."
