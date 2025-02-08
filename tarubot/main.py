@@ -46,11 +46,12 @@ Functions:
 
 
 def main() -> None:
-    test_guild_ids: Optional[list[int]] = (
-        list(map(int, cast(str, os.environ.get("DISCORD_GUILD_IDS")).split(",")))
-        if os.environ.get("DISCORD_GUILD_IDS")
-        else None
-    )
+    discord_guild_ids = os.environ.get("DISCORD_GUILD_IDS")
+
+    if discord_guild_ids:
+        test_guild_ids = list(map(int, discord_guild_ids.split(",")))
+    else:
+        test_guild_ids = None
 
     bot = TaruBot(test_guilds=test_guild_ids)
     bot.load_extensions("tarubot/cogs")

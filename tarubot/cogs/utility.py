@@ -87,6 +87,7 @@ class UtilityCommandsCog(commands.Cog):
         """
 
         character_data = await nodestone.get_character_by_id(character_id)
+
         if not character_data:
             await interaction.send("No character found with that ID.", ephemeral=True)
         else:
