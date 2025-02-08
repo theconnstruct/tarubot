@@ -1,16 +1,18 @@
 *.pyc
 
+__pycache__/
+
 # Packages
-/dist/*
+/dist/
 
 # Unit test / coverage reports
 .coverage
 .pytest_cache
 
 .DS_Store
-.idea/*
+.idea/
 .python-version
-.vscode/*
+.vscode/
 
 /docs/site/*
 .mypy_cache
