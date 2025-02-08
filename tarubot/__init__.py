@@ -26,8 +26,6 @@ If any required environment variable is missing, a critical log message is issue
 """
 
 from dotenv import load_dotenv
-from tarubot.lib import db
-import trio
 import coloredlogs
 import logging
 import os
@@ -55,5 +53,3 @@ for var, desc in required_vars.items():
 if missing:
     logging.critical("Exiting due to missing environment variables.")
     exit(1)
-
-trio.run(db.init)

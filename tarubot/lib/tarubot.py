@@ -42,3 +42,7 @@ class TaruBot(commands.InteractionBot):
 
         # I was originally going to set this to "with itself," but that seemed a bit too... Y'know.
         await self.change_presence(activity=disnake.Game(name="with the API."))
+
+        logging.info("Establishing database connection...")
+        await db.init()
+        logging.info("Database connection established.")

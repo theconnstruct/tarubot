@@ -52,6 +52,9 @@ async def test_db():
 
 
 async def init():
+    if Tortoise.apps:
+        return
+
     db_url = "{driver}://{user}:{password}@{host}:{port}/{database}".format(
         **{
             k.lower(): os.environ.get("DB_" + k)
