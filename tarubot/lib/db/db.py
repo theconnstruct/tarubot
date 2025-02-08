@@ -52,7 +52,12 @@ async def test_db():
 
 
 async def init():
-    db_url = f'{os.environ.get("DB_DRIVER")}://{os.environ.get("DB_USER")}:{os.environ.get("DB_PASSWORD")}@{os.environ.get("DB_HOST")}:{os.environ.get("DB_PORT")}/{os.environ.get("DB_DATABASE")}'
+    db_url = "{driver}://{user}:{password}@{host}:{port}/{database}".format(
+        **{
+            k.lower(): os.environ.get("DB_" + k)
+            for k in ("DRIVER", "USER", "PASSWORD", "HOST", "PORT", "DATABASE")
+        }
+    )
 
     await Tortoise.init(
         db_url=db_url,
