@@ -1,6 +1,8 @@
-from tortoise import fields, Tortoise
+from tortoise import fields, Tortoise, connections
 from tortoise.models import Model
 import os
+
+db_connected = False
 
 
 class DiscordUser(Model):
@@ -47,11 +49,15 @@ class GameCharacter(Model):
         table = "game_characters"
 
 
-async def test_db() -> bool:
-    await Tortoise.get_connection("default").execute_query("SELECT 1")
-    return True
+async def test_db():
+    if not db_connected:
+        await init()
+
+    await connections.get("default").execute_query("SELECT 1")
 
 
 async def init():
     await Tortoise.init(db_url=os.environ.get("DATABASE_URL"))
     await Tortoise.generate_schemas(safe=True)
+    global db_connected
+    db_connected = True

@@ -15,7 +15,6 @@
 
 
 from tarubot.lib import TaruBot
-from typing import Optional, cast
 import os
 
 """
