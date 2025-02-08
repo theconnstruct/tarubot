@@ -57,23 +57,7 @@ async def test_db():
 
 
 async def init():
-    db_connection_data = {
-        "connections": {
-            "default": {
-                "engine": "tortoise.backends.asyncpg",
-                "credentials": {
-                    "ssl": "verify-full",
-                },
-            },
-        }
-    }
-
-    db_connection_data["connections"]["default"]["credentials"] = {
-        key.lower(): os.environ.get(f"DB_{key}")
-        for key in ["HOST", "PORT", "USER", "PASSWORD", "DATABASE"]
-    }
-
-    await Tortoise.init(config=db_connection_data)
+    await Tortoise.init(db_url=os.environ.get("DB_URL"))
     await Tortoise.generate_schemas(safe=True)
     global db_connected
     db_connected = True
