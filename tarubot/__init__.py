@@ -27,7 +27,7 @@ If any required environment variable is missing, a critical log message is issue
 
 from dotenv import load_dotenv
 from tarubot.lib import db
-import asyncio
+import trio
 import coloredlogs
 import logging
 import os
@@ -56,4 +56,4 @@ if missing:
     logging.critical("Exiting due to missing environment variables.")
     exit(1)
 
-asyncio.run(db.init())
+trio.run(db.init)
