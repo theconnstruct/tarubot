@@ -37,6 +37,7 @@ coloredlogs.install(level=os.environ.get("LOG_LEVEL") or "INFO")
 required_vars = {
     "DISCORD_API_TOKEN": "Discord API token",
     "NODESTONE_BASE_URI": "Nodestone API base URI",
+    "DATABASE_URL": "database connection string",
 }
 
 missing = False

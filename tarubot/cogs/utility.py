@@ -15,7 +15,7 @@
 
 
 from disnake.ext import commands
-from tarubot.lib import nodestone, TaruBot
+from tarubot.lib import nodestone, TaruBot, db
 import disnake
 
 
@@ -96,6 +96,23 @@ class UtilityCommandsCog(commands.Cog):
                     character_data["Name"], character_data["World"]
                 )
             )
+
+    @commands.slash_command(description="Test database connectivity.")
+    async def test_db(self, interaction: disnake.ApplicationCommandInteraction):
+        """
+        Tests the database connection by executing a simple query.
+        This command attempts to connect to the database and execute a simple query to verify the connection.
+        If the connection is successful, it sends an ephemeral message indicating that the connection was successful.
+        If the connection fails, it raises an error and sends an ephemeral message indicating that the connection failed.
+        Parameters:
+            interaction (disnake.ApplicationCommandInteraction): The interaction object representing the command invocation.
+        """
+
+        try:
+            await db.test_db()
+            await interaction.send("Database connection successful.", ephemeral=True)
+        except Exception as e:
+            await interaction.send("Database connection failed.", ephemeral=True)
 
     @commands.slash_command(
         description="View version, source code, and license information for this bot and integrated services."
