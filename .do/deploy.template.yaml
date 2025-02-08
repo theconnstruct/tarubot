@@ -36,9 +36,21 @@ spec:
     - key: LOG_LEVEL
       scope: RUN_TIME
       value: INFO
-    - key: DATABASE_URL
+    - key: DB_HOST
       scope: RUN_TIME
-      value: ${tarubot-db.DATABASE_URL}
+      value: ${tarubot-db.HOSTNAME}
+    - key: DB_PORT
+      scope: RUN_TIME
+      value: ${tarubot-db.PORT}
+    - key: DB_DATABASE
+      scope: RUN_TIME
+      value: ${tarubot-db.DATABASE}
+    - key: DB_USER
+      scope: RUN_TIME
+      value: ${tarubot-db.USERNAME}
+    - key: DB_PASSWORD
+      scope: RUN_TIME
+      value: ${tarubot-db.PASSWORD}
     git:
       branch: main
       repo_clone_url: https://github.com/theconnstruct/tarubot.git

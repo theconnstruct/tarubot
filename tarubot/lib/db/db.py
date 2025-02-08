@@ -57,12 +57,14 @@ async def test_db():
 
 
 async def init():
+    db_url = f'postgres://{os.environ.get("DB_USER")}:{os.environ.get("DB_PASSWORD")}@{os.environ.get("DB_HOST")}:{os.environ.get("DB_PORT")}/{os.environ.get("DB_DATABASE")}'
+
     await Tortoise.init(
-        db_url=os.environ.get("DATABASE_URL"),
-        modules={
-            "models": ["tarubot.lib.db.db"],
-        },
+        db_url=db_url,
+        modules={"models": ["tarubot.lib.db.db"]},
     )
+
     await Tortoise.generate_schemas(safe=True)
+
     global db_connected
     db_connected = True
