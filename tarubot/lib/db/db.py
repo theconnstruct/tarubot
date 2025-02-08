@@ -57,7 +57,7 @@ async def test_db():
 
 
 async def init():
-    await Tortoise.init(db_url=os.environ.get("DB_URL"))
+    await Tortoise.init(db_url=os.environ.get("DATABASE_URL"))
     await Tortoise.generate_schemas(safe=True)
     global db_connected
     db_connected = True
