@@ -40,9 +40,6 @@ spec:
     - key: LOG_LEVEL
       scope: RUN_TIME
       value: INFO
-    - key: NODESTONE_BASE_URI
-      scope: RUN_TIME
-      value: http://nodestone:8080
     - key: DATABASE_URL
       scope: RUN_TIME
       value: ${tarubot-db.DATABASE_URL}

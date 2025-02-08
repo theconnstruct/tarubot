@@ -16,15 +16,13 @@
 
 from typing import Union
 import aiohttp
-import os
 
 
 async def get_character_by_id(character_id: int) -> Union[dict, None]:
     """
     Asynchronously retrieves character data for a given character ID from the Nodestone API.
 
-    This function performs an HTTP GET request to the Nodestone API, using the base URI
-    specified by the NODESTONE_BASE_URI environment variable. If the request is successful
+    This function performs an HTTP GET request to the Nodestone API. If the request is successful
     (i.e., returns a status code of 200), the function extracts and returns the character
     information from the returned JSON data. If the request fails or the character data is not
     found, the function returns None.
@@ -39,7 +37,7 @@ async def get_character_by_id(character_id: int) -> Union[dict, None]:
 
     async with aiohttp.ClientSession() as session:
         async with session.get(
-            f"{os.environ.get("NODESTONE_BASE_URI")}/Character/{character_id}"
+            f"http://nodestone:8080/Character/{character_id}"
         ) as response:
             if response.status == 200:
                 response_data = await response.json()

@@ -21,7 +21,7 @@ This module initializes the environment for TaruBot by performing the following 
       defaulting to "INFO" if not provided.
     - Verifies that all required environment variables are set. The required variables include:
         - DISCORD_API_TOKEN: Discord API token.
-        - NODESTONE_BASE_URI: Nodestone API base URI.
+        - DATABASE_URL: Database connection string.
 If any required environment variable is missing, a critical log message is issued and the program exits.
 """
 
@@ -36,7 +36,6 @@ coloredlogs.install(level=os.environ.get("LOG_LEVEL") or "INFO")
 
 required_vars = {
     "DISCORD_API_TOKEN": "Discord API token",
-    "NODESTONE_BASE_URI": "Nodestone API base URI",
     "DATABASE_URL": "database connection string",
 }
 
