@@ -62,7 +62,7 @@ async def init():
             "default": {
                 "engine": "tortoise.backends.asyncpg",
                 "credentials": {
-                    "ssl": True,
+                    "ssl": "verify-full",
                 },
             },
         }
