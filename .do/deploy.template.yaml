@@ -11,10 +11,6 @@ spec:
   name: tarubot
   services:
   - environment_slug: node-js
-    envs:
-    - key: DATABASE_URL
-      scope: RUN_TIME
-      value: ${tarubot-db.DATABASE_URL}
     git:
       branch: master
       repo_clone_url: https://github.com/xivapi/nodestone.git
