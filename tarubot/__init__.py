@@ -38,6 +38,7 @@ coloredlogs.install(level=os.environ.get("LOG_LEVEL") or "INFO")
 
 required_vars = {
     "DISCORD_API_TOKEN": "Discord API token",
+    "DB_DRIVER": "database driver",
     "DB_HOST": "database host",
     "DB_PORT": "database port",
     "DB_USER": "database user",
