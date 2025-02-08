@@ -37,7 +37,11 @@ coloredlogs.install(level=os.environ.get("LOG_LEVEL") or "INFO")
 required_vars = {
     "DISCORD_API_TOKEN": "Discord API token",
     "NODESTONE_BASE_URI": "Nodestone API base URI",
-    "DATABASE_URL": "database connection string",
+    "DB_HOST": "database host",
+    "DB_PORT": "database port",
+    "DB_USER": "database user",
+    "DB_PASSWORD": "database password",
+    "DB_DATABASE": "database name",
 }
 
 missing = False
@@ -49,11 +53,3 @@ for var, desc in required_vars.items():
 if missing:
     logging.critical("Exiting due to missing environment variables.")
     exit(1)
-
-logging.debug(
-    "Environment variable data:\n{}".format(
-        "\n".join(
-            f"{k}: {v}" for k, v in os.environ.items() if k != "DISCORD_API_TOKEN" and k
-        )
-    )
-)
