@@ -73,7 +73,7 @@ async def init():
         for key in ["HOST", "PORT", "USER", "PASSWORD", "DATABASE"]
     }
 
-    await Tortoise.init(db_url=os.environ.get("DATABASE_URL"))
+    await Tortoise.init(config=db_connection_data)
     await Tortoise.generate_schemas(safe=True)
     global db_connected
     db_connected = True
