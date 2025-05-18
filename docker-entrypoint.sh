@@ -2,8 +2,8 @@
 
 if [ "${RUN_MIGRATIONS_ON_STARTUP}" = "true" ]; then
   echo "Running Prisma migrations and generating client..."
-  bunx prisma migrate deploy  
-  bunx prisma generate
+  bun x prisma migrate deploy  
+  bun x prisma generate
 else
   echo "Skipping automatic migrations and client generation."
 fi
