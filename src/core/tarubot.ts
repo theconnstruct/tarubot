@@ -65,7 +65,6 @@ export class TaruBot extends Client {
         const guildId = Bun.env.DISCORD_GUILD_ID;
         const clientId = Bun.env.DISCORD_APP_ID as string;
 
-
         try {
             if (guildId) {
                 logger.info(`Registering ${commandPayloads.length} application command(s) for guild: ${guildId}.`);

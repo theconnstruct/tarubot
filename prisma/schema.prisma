@@ -23,6 +23,6 @@ model Character {
   name          String
   ownerId       BigInt
   owner         DiscordUser @relation(fields: [ownerId], references: [id])
-  freeCompanyId BigInt
-  freeCompany   FreeCompany @relation(fields: [freeCompanyId], references: [id])
+  freeCompanyId BigInt?
+  freeCompany   FreeCompany? @relation(fields: [freeCompanyId], references: [id])
 }
