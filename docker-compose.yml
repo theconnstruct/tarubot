@@ -1,0 +1,12 @@
+services:
+  nodestone:
+    build: https://github.com/xivapi/nodestone.git
+    restart: unless-stopped
+
+  worker:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      - nodestone
+    env_file:
+      - .env

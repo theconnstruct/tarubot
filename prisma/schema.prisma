@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model DiscordUser {
+  id        BigInt     @id @map("discord_id")
+  characters Character[]
+}
+
+model FreeCompany {
+  id         BigInt      @id @map("fc_id")
+  name       String
+  characters Character[]
+}
+
+model Character {
+  id            BigInt      @id @map("character_id")
+  name          String
+  ownerId       BigInt
+  owner         DiscordUser @relation(fields: [ownerId], references: [id])
+  freeCompanyId BigInt
+  freeCompany   FreeCompany @relation(fields: [freeCompanyId], references: [id])
+}
