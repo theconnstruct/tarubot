@@ -1,6 +1,8 @@
 import axios from 'axios';
+import { db } from './db'; // Import the db service
 
 const NODESTONE_URL = Bun.env.NODESTONE_URL;
+const SIX_HOURS_IN_MS = 6 * 60 * 60 * 1000;
 
 interface XIVAPICharacterData {
     ID: number;
@@ -95,11 +97,29 @@ async function fetchData<T>(endpoint: string, params?: Record<string, any>): Pro
 }
 
 export async function getCharacterById(id: string): Promise<Character> {
+    const characterIdBigInt = BigInt(id);
+    const dbCharacter = await db.character.get(characterIdBigInt);
+
+    if (dbCharacter && dbCharacter.lodestoneUpdatedAt && (new Date().getTime() - dbCharacter.lodestoneUpdatedAt.getTime()) < SIX_HOURS_IN_MS) {
+        // Data is fresh enough, return from DB
+        return {
+            ID: String(dbCharacter.id),
+            Name: dbCharacter.name,
+            World: 'Unknown World', // Placeholder, as World is not stored in Character model directly
+            FreeCompanyID: dbCharacter.freeCompanyId ? String(dbCharacter.freeCompanyId) : null,
+        };
+    }
+
+    // Data is stale or not in DB, fetch from Lodestone
     const rawData = await fetchData<XIVAPICharacterResponse>(`character/${id}`);
     if (!rawData || !rawData.Character) {
         throw new Error(`Invalid character data received for ID ${id}`);
     }
     const charData = rawData.Character;
+
+    // Update DB with fresh data
+    await db.character.update(characterIdBigInt, charData.Name, charData.FreeCompany && charData.FreeCompany.ID ? BigInt(charData.FreeCompany.ID) : null);
+
     return {
         ID: String(charData.ID),
         Name: charData.Name,
@@ -149,11 +169,28 @@ export async function searchCharacter(firstName: string, lastName: string, world
 }
 
 export async function getFreeCompanyById(id: string): Promise<FreeCompany> {
+    const fcIdBigInt = BigInt(id);
+    const dbFc = await db.freeCompany.get(fcIdBigInt);
+
+    if (dbFc && dbFc.lodestoneUpdatedAt && (new Date().getTime() - dbFc.lodestoneUpdatedAt.getTime()) < SIX_HOURS_IN_MS) {
+        // Data is fresh enough, return from DB
+        return {
+            ID: String(dbFc.id),
+            Name: dbFc.name,
+            World: 'Unknown World', // Placeholder, as World is not stored in FreeCompany model directly
+        };
+    }
+
+    // Data is stale or not in DB, fetch from Lodestone
     const rawData = await fetchData<XIVAPIFreeCompanyResponse>(`freecompany/${id}`);
     if (!rawData || !rawData.FreeCompany) {
         throw new Error(`Invalid Free Company data received for ID ${id}`);
     }
     const fcData = rawData.FreeCompany;
+
+    // Update DB with fresh data
+    await db.freeCompany.update(fcIdBigInt, fcData.Name);
+
     return {
         ID: String(fcData.ID),
         Name: fcData.Name,

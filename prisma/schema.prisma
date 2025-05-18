@@ -16,13 +16,23 @@ model FreeCompany {
   id         BigInt      @id @map("fc_id")
   name       String
   characters Character[]
+  lodestoneUpdatedAt DateTime? @map("lodestone_updated_at") // New field
 }
 
 model Character {
   id            BigInt      @id @map("character_id")
   name          String
-  ownerId       BigInt
-  owner         DiscordUser @relation(fields: [ownerId], references: [id])
+  ownerId       BigInt? // Made optional
+  owner         DiscordUser? @relation(fields: [ownerId], references: [id]) // Made optional
   freeCompanyId BigInt?
   freeCompany   FreeCompany? @relation(fields: [freeCompanyId], references: [id])
+  lodestoneUpdatedAt DateTime? @map("lodestone_updated_at") // New field
+}
+
+model GuildConfig {
+  guildId      String  @id @map("guild_id")
+  memberRoleId String? @map("member_role_id")
+  guestRoleId  String? @map("guest_role_id")
+  fcId         String? @map("fc_id") // New field for Free Company ID
+  // Add other guild-specific config fields here in the future
 }
