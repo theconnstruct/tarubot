@@ -3,10 +3,25 @@ services:
     build: https://github.com/xivapi/nodestone.git
     restart: unless-stopped
 
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
   worker:
     build: .
     restart: unless-stopped
     depends_on:
       - nodestone
+      - db
     env_file:
       - .env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST:-db}:${POSTGRES_PORT:-5432}/${POSTGRES_DB}?schema=public
+    entrypoint: [ "/home/tarubot/docker-entrypoint.sh" ]
+
+volumes:
+  postgres_data:
